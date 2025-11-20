@@ -29,7 +29,11 @@ export default () => {
       ref={wrapper}
       className="pointer-events-none fixed top-0 left-0"
     >
-      <span>{track?.name}</span>
+      <span
+        className="p-2 border bg-black/75"
+      >
+        {track?.name}
+      </span>
     </div>
   )
 }

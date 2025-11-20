@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import Mouse from "@/components/Tooltip";
+import gsap from "gsap";
+import { useRef } from "react"
 
 import * as d3 from "d3";
 import spotify from "@/data/spotify";
@@ -53,27 +53,70 @@ export default ({ data, width = 500, height = 1000 }: Args) => {
               .toSorted((a, b) => a.album.artists[0].name.localeCompare(b.album.artists[0].name))
 
             return (
-              <g key={`${r}-root`}>
-                {tracks.map((t, i) => (
-                  <rect
-                    key={`${r}-high-${t}-${i}`}
-                    fill="transparent"
-                    stroke="white"
-                    strokeWidth={1}
-                    x={x(r) - rectSize / 2}
-                    y={i * (rectSize + rectSpacing)}
-                    width={rectSize}
-                    height={rectSize}
-                    onMouseEnter={(e) => {
-                      // console.log(e)
-                      setTooltip(true, t)
-                    }}
-                    onMouseLeave={(e) => {
-                      // console.log(e)
-                      setTooltip(false, null)
-                    }}
-                  />
-                ))}
+              <g
+                key={`${r}-root`}
+              >
+                {tracks.map((t, i) => {
+                  const ref = useRef<SVGImageElement | null>(null)
+
+                  const handleMouseEnter = () => {
+                    setTooltip(true, t)
+
+                    if (!ref.current) {
+                      return
+                    }
+
+                    gsap.to(ref.current, {
+                      scale: 0.8,
+                      duration: 0.3,
+                      ease: "power3.out",
+                      transformOrigin: "50% 50%",
+                    })
+                  }
+
+                  const handleMouseLeave = () => {
+                    setTooltip(false, t)
+
+                    if (!ref.current) {
+                      return
+                    }
+
+                    gsap.to(ref.current, {
+                      scale: 1,
+                      duration: 1.0,
+                      ease: "power3.out",
+                      transformOrigin: "50% 50%",
+                    })
+                  }
+
+                  return (
+                    <g
+                      key={`${r}-high-${t}-${i}`}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <rect
+                        fill="transparent"
+                        stroke="white"
+                        strokeWidth={0}
+                        x={x(r) - rectSize / 2}
+                        y={15 + i * (rectSize + rectSpacing)}
+                        width={rectSize}
+                        height={rectSize}
+                      />
+                      <image
+                        ref={ref}
+                        href={t.album.images[0].url}
+                        x={x(r) - rectSize / 2}
+                        y={15 + i * (rectSize + rectSpacing)}
+                        width={rectSize}
+                        height={rectSize}
+                        preserveAspectRatio="xMidYMid slice"
+                        // preserveAspectRatio="cover"
+                      />
+                    </g>
+                  )
+                })}
 
                 <circle
                   stroke="white"
@@ -99,14 +142,3 @@ export default ({ data, width = 500, height = 1000 }: Args) => {
     </>
   )
 }
-
-
-                  // <image
-                  //   key={`${r}-img-${t}-${i}`}
-                  //   href={t.album.images[0].url}
-                  //   x={x(r) - rectSize / 2}
-                  //   y={10 + i * (rectSize + rectSpacing)}
-                  //   width={rectSize}
-                  //   height={rectSize}
-                  //   preserveAspectRatio="cover"
-                  // />

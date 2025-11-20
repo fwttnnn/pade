@@ -10,11 +10,11 @@ export default () => {
       <div
         className="flex flex-col gap-[24px] flex-wrap items-center justify-center"
       >
-        {/* <h1
+        <h1
           className="text-6xl z-10"
         >
-          spotify
-        </h1> */}
+          spotify wrapped
+        </h1>
 
         <Chart.Spotify
           data={spotify}
