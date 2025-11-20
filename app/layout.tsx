@@ -21,8 +21,8 @@ const _02 = Plus_Jakarta_Sans({
 const fonts = [_01]
 
 export const metadata: Metadata = {
-  title: "padé",
-  description: "atjeh paddy productions (2018-2023)",
+  title: "sptfw",
+  description: "spotify wrapped (data viz challenge '2025)",
 }
 
 export default ({ children }: Readonly<{ children: React.ReactNode }>) => {
