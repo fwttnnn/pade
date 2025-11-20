@@ -15,11 +15,11 @@ export type Args = {
   height?: number,
 }
 
-export default ({ data, width = 500, height = 1000 }: Args) => {
+export default ({ data, width = 500, height = 500 }: Args) => {
   data.items.sort((t) => t.popularity)
   const setTooltip = useTooltip((state) => state.setTooltip)
 
-  const margin = { top: 40, right: 15, bottom: 40, left: 15 }
+  const margin = { top: 40, right: 15, bottom: 20, left: 15 }
   const innerWidth = width - margin.left - margin.right
   const innerHeight = height - margin.top - margin.bottom
 
@@ -31,11 +31,23 @@ export default ({ data, width = 500, height = 1000 }: Args) => {
   const x = d3.scaleLinear()
     .domain([range[0], range[range.length - 1]])
     .range([0, innerWidth])
+  
+  const rectSize = 43
+  const rectSpacing = 4
+
+  const bucketHeights = range.map(r => {
+    const tracks = data.items.filter(t => p(t.popularity) === r)
+    return 15 + tracks.length * (rectSize + rectSpacing)
+  })
+
+  const _height = margin.top
+                + Math.max(...bucketHeights)
+                + margin.bottom
 
   return (
     <svg
       width={width}
-      height={height}
+      height={_height}
     >
       <g
         transform={`translate(${margin.left},${margin.top})`}
@@ -48,9 +60,6 @@ export default ({ data, width = 500, height = 1000 }: Args) => {
           stroke="currentColor"
         />
         {range.map((r: number) => {
-          const rectSize = 43
-          const rectSpacing = 4
-
           const tracks = data.items
             .filter((t) => p(t.popularity) === r)
             .sort((a, b) => {
@@ -87,8 +96,9 @@ export default ({ data, width = 500, height = 1000 }: Args) => {
                   }
 
                   gsap.to(ref.current, {
+                    overwrite: true,
                     scale: 0.8,
-                    duration: 0.3,
+                    duration: 0.2,
                     ease: "power3.out",
                     transformOrigin: "50% 50%",
                   })
@@ -102,6 +112,7 @@ export default ({ data, width = 500, height = 1000 }: Args) => {
                   }
 
                   gsap.to(ref.current, {
+                    overwrite: true,
                     scale: 1,
                     duration: 1.0,
                     ease: "power3.out",
@@ -116,13 +127,12 @@ export default ({ data, width = 500, height = 1000 }: Args) => {
                     onMouseLeave={handleMouseLeave}
                   >
                     <rect
-                      fill="transparent"
-                      stroke="white"
-                      strokeWidth={0}
                       x={x(r) - rectSize / 2}
                       y={15 + i * (rectSize + rectSpacing)}
                       width={rectSize}
                       height={rectSize}
+                      fill="transparent"
+                      pointerEvents="all"     // makes sure the hitbox doesn't shrink
                     />
                     <image
                       ref={ref}
@@ -132,7 +142,7 @@ export default ({ data, width = 500, height = 1000 }: Args) => {
                       width={rectSize}
                       height={rectSize}
                       preserveAspectRatio="xMidYMid slice"
-                    // preserveAspectRatio="cover"
+                      // preserveAspectRatio="cover"
                     />
                   </g>
                 )
