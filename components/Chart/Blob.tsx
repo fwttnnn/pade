@@ -53,7 +53,7 @@ export default ({ data, size = 40, width = 500, height = 400 }: Args) => {
             {subg.map((s) => (
               <circle
                 key={`-:circle-${c}-${s}`}
-                cx={x1(s) + (x1.bandwidth() / 2)}
+                cx={x1(s)! + (x1.bandwidth() / 2)}
                 cy={0}
                 r={r(data[c][s])}
                 fill="rgba(255,255,255,0.5)"

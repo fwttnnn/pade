@@ -18,7 +18,7 @@ const _02 = Plus_Jakarta_Sans({
   subsets: ["latin"],
 })
 
-const fonts = [_01]
+const fonts = [_01, _02]
 
 export const metadata: Metadata = {
   title: "sptfw",

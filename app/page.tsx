@@ -1,8 +1,5 @@
 import Chart from "@/components/Chart"
-
-import pade from "@/data/pade"
 import spotify from "@/data/spotify"
-import transjakarta from "@/data/transjakarta"
 
 export default () => {
   return (
