@@ -36,6 +36,12 @@ export default () => {
           atjeh padé production
         </h1>
       </div>
+
+      <Chart.Blob
+        data={data}
+        size={40}
+        width={700}
+      />
     </main>
   )
 }
