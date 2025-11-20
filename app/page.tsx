@@ -1,6 +1,7 @@
 import Chart from "@/components/Chart"
 
 import pade from "@/data/pade"
+import spotify from "@/data/spotify"
 import transjakarta from "@/data/transjakarta"
 
 export default () => {
@@ -9,11 +10,15 @@ export default () => {
       <div
         className="flex flex-col gap-[24px] flex-wrap items-center justify-center"
       >
-        <h1
+        {/* <h1
           className="text-6xl z-10"
         >
-          transjakarta routes
-        </h1>
+          spotify
+        </h1> */}
+
+        <Chart.Spotify
+          data={spotify}
+        />
       </div>
     </main>
   )
