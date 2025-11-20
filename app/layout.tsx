@@ -21,7 +21,7 @@ const _02 = Plus_Jakarta_Sans({
 const fonts = [_01, _02]
 
 export const metadata: Metadata = {
-  title: "sptfw",
+  title: "sptfw - spotify wrapped",
   description: "spotify wrapped (data viz challenge '2025)",
 }
 
