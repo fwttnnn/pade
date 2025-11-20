@@ -126,14 +126,6 @@ export default ({ data, width = 500, height = 500 }: Args) => {
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <rect
-                      x={x(r) - rectSize / 2}
-                      y={15 + i * (rectSize + rectSpacing)}
-                      width={rectSize}
-                      height={rectSize}
-                      fill="transparent"
-                      pointerEvents="all"     // makes sure the hitbox doesn't shrink
-                    />
                     <image
                       ref={ref}
                       href={t.album.images[0].url}
