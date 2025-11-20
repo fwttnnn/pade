@@ -9,6 +9,11 @@ body {
   background: var(--background);
   color: var(--foreground);
 
-  /* font-family: Arial, Helvetica, sans-serif; */
-  font-family: var(--font-vl);
+  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: var(--font-vl); */
+  /* font-family: var(--font-pjs); */
+}
+
+h1 {
+  /* color: #9f9f9f; */
 }

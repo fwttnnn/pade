@@ -1,5 +1,7 @@
 import Chart from "@/components/Chart"
+
 import pade from "@/data/pade"
+import transjakarta from "@/data/transjakarta"
 
 export default () => {
   let data: {[year: number]: {[city: string]: number}} = {}
@@ -28,20 +30,22 @@ export default () => {
   return (
     <main>
       <div
-        className="flex flex-col gap-[24px] flex-wrap items-center justify-center"
+        className="relative flex flex-col gap-[24px] flex-wrap items-center justify-center"
       >
         <h1
-          className="text-7xl"
+          className="text-6xl z-10"
         >
-          atjeh padé production
+          transjakarta routes
         </h1>
-      </div>
 
-      <Chart.Blob
-        data={data}
-        size={40}
-        width={700}
-      />
+        <div
+          className="transform scale-[1.6] origin-center"
+        >
+          <Chart.Map
+            data={{}}
+          />
+        </div>
+      </div>
     </main>
   )
 }
