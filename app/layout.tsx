@@ -30,7 +30,7 @@ export default ({ children }: Readonly<{ children: React.ReactNode }>) => {
     <html lang="en">
       <Lenis root>
         <body
-          className={`${fonts.map((f) => f.variable).join(" ")} max-w-[920px] mx-auto my-15 py-5 px-7.5 antialiased`}
+          className={`${fonts.map((f) => f.variable).join(" ")} max-w-[570px] mx-auto my-15 py-5 px-7.5 antialiased`}
         >
           <Tooltip />
           {children}
