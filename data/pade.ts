@@ -1,4 +1,4 @@
-export default [
+const _d = [
   {
     "bps_kode_provinsi": 11,
     "bps_nama_provinsi": "Aceh",
@@ -2760,3 +2760,22 @@ export default [
     "satuan": "Ton"
   }
 ]
+
+let data: {[year: number]: {[city: string]: number}} = {}
+_d.filter((d) => d["jenis_produksi"] == "Padi")
+    .forEach((d) => {
+      if (!(d["tahun"] in data)) {
+        data[d["tahun"]] = {};
+      }
+
+      /**
+       * NOTE: just to be sure, extra guard for a duplicated city
+       */
+      if (!(d["bps_nama_kabupaten_kota"] in data[d["tahun"]])) {
+        data[d["tahun"]][d["bps_nama_kabupaten_kota"]] = 0
+      }
+
+      data[d["tahun"]][d["bps_nama_kabupaten_kota"]] += d["jumlah_produksi"]
+    })
+
+export default data
