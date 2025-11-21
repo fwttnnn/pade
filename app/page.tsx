@@ -21,6 +21,14 @@ export default () => {
             data={spotify}
           />
         </div>
+
+        <br />
+        <br />
+        <br />
+
+        <Link href="/api/spotify/auth">
+          login (do not)
+        </Link>
         {/* <p
           className="text-center text-slate-700"
         >

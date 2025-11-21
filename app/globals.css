@@ -13,3 +13,7 @@ body {
   /* font-family: var(--font-vl); */
   /* font-family: var(--font-pjs); */
 }
+
+button {
+  cursor: pointer !important;
+}
