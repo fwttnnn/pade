@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
-import pkce from '@/lib/spotify/pkce'
+import { NextRequest, NextResponse } from "next/server"
+import pkce from "@/lib/spotify/pkce"
 
 export const GET = async (request: NextRequest) => {
   const _url = new URL(request.url)
