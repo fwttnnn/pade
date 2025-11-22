@@ -5,10 +5,7 @@
 
 import crypto from "crypto"
 
-export const generateAuthorizeURL = async (clientId: string, redirectURI: string, scopes: string[]): Promise<{ url: string, verifier: string }> => {
-  const verifier = generateCodeVerifier(128);
-  const challenge = await generateCodeChallenge(verifier);
-
+export const generateAuthorizeURL = async (clientId: string, redirectURI: string, scopes: string[], challenge: string): Promise<string> => {
   const params = new URLSearchParams();
   params.append("client_id", clientId);
   params.append("response_type", "code");
@@ -17,7 +14,7 @@ export const generateAuthorizeURL = async (clientId: string, redirectURI: string
   params.append("code_challenge_method", "S256");
   params.append("code_challenge", challenge);
 
-  return { url: `https://accounts.spotify.com/authorize?${params.toString()}`, verifier: verifier };
+  return `https://accounts.spotify.com/authorize?${params.toString()}`
 }
 
 export const generateCodeVerifier = (length: number): string => {
