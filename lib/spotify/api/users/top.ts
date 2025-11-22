@@ -1,8 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
-
-export const GET = async (request: NextRequest) => {
-  const token = request.cookies.get("sptfw--cookie:token")?.value
-
+export default async (token: string, depth: number): Promise<{[key: string]: any}> => {
   const timeRange = "short_term"
   // const timeRange = "medium_term"
   // const timeRange = "long_term"
@@ -19,5 +15,5 @@ export const GET = async (request: NextRequest) => {
   })
 
   const json = await result.json()
-  return NextResponse.json(json)
+  return json
 }
